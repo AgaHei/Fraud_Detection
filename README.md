@@ -78,33 +78,33 @@ This fraud detection system analyzes financial transactions in real-time to iden
 ## 📁 Project Structure
 
 ```
-Project Automatic Fraud Detection/
-├──📁 notebooks/
-│   ├── 📊 01_EDA_for_fraud_detection.ipynb    # Exploratory Data Analysis
-│   ├── 🔧 02_Feature_Engineering.ipynb        # Feature Engineering & Model Training
-├── 📋 README.md                          # This file
-├── 📦 requirements.txt                   # Python dependencies
-├── 🔒 .env                              # Environment variables (create this)
-├── 🔒 .gitignore                        # Git ignore rules
-│
-├── 📁 config/
-│   ├── __init__.py
-│   └── config.py                        # Configuration settings
-│
-├── 📁 src/
-│   ├── mock_transaction_api.py          # Mock API for testing
-│   ├── real_time_predictor.py           # Main fraud detection engine
-│   ├── prepare_api_data.py              # Data preparation utilities
-│   └── generate_demo_report.py          # Reporting system
-│
-├── 📁 models/
-│   └── fraud_detection_pipeline.joblib   # Trained ML model (generated)
-│
-├── 📁 data/
-│   ├── fraudTest.csv                    # Main dataset
-│   └── api_test_set.csv                 # API simulation data (generated)
-│
-└── 📁 logs/
+   Project Automatic Fraud Detection/
+   ├──📁 notebooks/
+   │   ├── 📊 01_EDA_for_fraud_detection.ipynb    # Exploratory Data Analysis
+   │   ├── 🔧 02_Feature_Engineering.ipynb        # Feature Engineering & Model Training
+   ├── 📋 README.md                          # This file
+   ├── 📦 requirements.txt                   # Python dependencies
+   ├── 🔒 .env                              # Environment variables (create this)
+   ├── 🔒 .gitignore                        # Git ignore rules
+   │
+   ├── 📁 config/
+   │   ├── __init__.py
+   │   └── config.py                        # Configuration settings
+   │
+   ├── 📁 src/
+   │   ├── mock_transaction_api.py          # Mock API for testing
+   │   ├── real_time_predictor.py           # Main fraud detection engine
+   │   ├── prepare_api_data.py              # Data preparation utilities
+   │   └── generate_demo_report.py          # Reporting system
+   │
+   ├── 📁 models/
+   │   └── fraud_detection_pipeline.joblib   # Trained ML model (generated)
+   │
+   ── 📁 data/
+   │   ├── fraudTest.csv                    # Main dataset
+   │   └── api_test_set.csv                 # API simulation data (generated)
+   │
+   └── 📁 logs/
     ├── api.log                          # API logs
     ├── predictor.log                    # Prediction logs
     └── demo_report_*.txt                # Generated reports
@@ -239,12 +239,6 @@ This project is for educational purposes of Data Science and Engineering Lead Bo
 **Current Version**: 1.0.0
 **Status**: Production Ready (with monitoring)
 **Last Updated**: February 2026
-
----
-
-**Built with ❤️ for the Data Science Community**
-
-For questions or support, please open an issue or contact the development team.
 
 ---
 

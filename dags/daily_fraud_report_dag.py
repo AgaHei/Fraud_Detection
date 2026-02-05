@@ -4,7 +4,7 @@ Daily Fraud Report DAG
 Airflow DAG that runs every morning to generate a summary report
 of all transactions and fraud detections from the previous day.
 
-Schedule: Daily at 8:00 AM
+Schedule: Daily at 15:30 (3:30 PM) - Demo time
 Owner: Fraud Detection Team
 
 Tasks:
@@ -26,18 +26,13 @@ import psycopg2
 import logging
 import os
 import sys
+from airflow.utils import timezone
+import pytz
 
-# Add project root to path to access config
-# Adjust this path based on where your Airflow dags folder is relative to project root
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
-try:
-    from config.config import DB_CONFIG
-except ImportError:
-    # Fallback if config not accessible
-    DB_CONFIG = {
-        'connection_string': os.getenv('NEON_CONNECTION_STRING')
-    }
+# Database configuration - use environment variable directly
+DB_CONFIG = {
+    'connection_string': 'postgresql://neondb_owner:npg_3BAwfS4XeEbN@ep-hidden-bar-agunkltg-pooler.c-2.eu-central-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require'
+}
 
 # ─────────────────────────────────────────────────────────────
 # DAG Configuration
@@ -56,8 +51,8 @@ dag = DAG(
     'daily_fraud_report',
     default_args=default_args,
     description='Generate daily fraud detection summary report',
-    schedule_interval='0 8 * * *',  # Every day at 8:00 AM
-    start_date=days_ago(1),
+    schedule_interval='0 16 * * *',  # Every day at 16:00 (4:00 PM) Paris time
+    start_date=datetime(2026, 2, 4, 16, 0, 0, tzinfo=pytz.timezone('Europe/Paris')),  # Start from yesterday so today runs
     catchup=False,  # Don't backfill historical runs
     tags=['fraud-detection', 'daily', 'reporting'],
 )

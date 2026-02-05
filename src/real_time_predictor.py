@@ -79,9 +79,17 @@ except Exception as e:
 # ─────────────────────────────────────────────────────────────
 
 def get_db_connection():
-    """Create PostgreSQL connection"""
+    """Create PostgreSQL connection with proper SSL handling"""
     try:
-        conn = psycopg2.connect(DB_CONFIG['connection_string'])
+        conn_string = DB_CONFIG['connection_string']
+        if 'sslmode' not in conn_string:
+            conn_string += '?sslmode=require'
+        
+        conn = psycopg2.connect(
+            conn_string,
+            connect_timeout=10,
+            application_name='fraud_predictor'
+        )
         return conn
     except Exception as e:
         logger.error(f"Database connection failed: {e}")
@@ -92,6 +100,33 @@ logger.info("\nTesting database connection...")
 test_conn = get_db_connection()
 if test_conn:
     logger.info("[SUCCESS] Database connection successful")
+    
+    # Create table if it doesn't exist
+    try:
+        cursor = test_conn.cursor()
+        create_table_sql = """
+        CREATE TABLE IF NOT EXISTS fraud_transactions (
+            transaction_id VARCHAR(255) PRIMARY KEY,
+            timestamp TIMESTAMP NOT NULL,
+            amount DECIMAL(10, 2) NOT NULL,
+            category VARCHAR(100),
+            merchant VARCHAR(255),
+            gender VARCHAR(10),
+            city_pop INTEGER,
+            lat DECIMAL(10, 6),
+            long DECIMAL(10, 6),
+            fraud_probability DECIMAL(5, 4) NOT NULL,
+            predicted_fraud BOOLEAN NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
+        """
+        cursor.execute(create_table_sql)
+        test_conn.commit()
+        cursor.close()
+        logger.info("[SUCCESS] Table fraud_transactions is ready")
+    except Exception as e:
+        logger.warning(f"Could not create/verify table: {e}")
+    
     test_conn.close()
 else:
     logger.error("❌ Database connection failed. Check your .env file")

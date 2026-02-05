@@ -46,7 +46,14 @@ models/*.h5
 
 # Log files
 logs/*.log
+logs/*.txt
 *.log
+
+# Docker volumes and data
+postgres-db-volume/
+
+# Temporary task scheduler files (now using Airflow)
+scripts/daily_report_scheduler.py
 
 # Database files
 *.db
