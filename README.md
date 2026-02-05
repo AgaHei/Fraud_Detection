@@ -73,7 +73,6 @@ This fraud detection system analyzes financial transactions in real-time to iden
 6. **Reporting Layer**: Automated report generation and performance monitoring
 
 
-```
 
 ## 📁 Project Structure
 
