@@ -29,9 +29,9 @@ import sys
 from airflow.utils import timezone
 import pytz
 
-# Database configuration - use environment variable directly
+# Database configuration - use environment variable
 DB_CONFIG = {
-    'connection_string': 'postgresql://neondb_owner:npg_3BAwfS4XeEbN@ep-hidden-bar-agunkltg-pooler.c-2.eu-central-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require'
+    'connection_string': os.getenv('NEON_CONNECTION_STRING', 'postgresql://user:password@localhost:5432/database')
 }
 
 # ─────────────────────────────────────────────────────────────
